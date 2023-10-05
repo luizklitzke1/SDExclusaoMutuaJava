@@ -6,12 +6,13 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Coordenador 
 {
-    public Map<Recurso, Queue<Solicitacao>> solicitacoesRecursos = new ConcurrentHashMap<>();
-    
-    public Coordenador() 
+    private Map<Recurso, Queue<Solicitacao>> solicitacoesRecursos = new ConcurrentHashMap<>();
+
+    private List<Recurso> recursos; // Apenas referência de controle para os presentes na classe geral
+ 
+    public Coordenador(List<Recurso> recursos) 
     {
-        solicitacoesRecursos.put(new Recurso(6), new ConcurrentLinkedQueue<>());
-        solicitacoesRecursos.put(new Recurso(9), new ConcurrentLinkedQueue<>());
+        this.recursos = recursos;
     }
 
     public void solicitarAcessoRecurso(Solicitacao solicitacao) 
@@ -56,11 +57,10 @@ public class Coordenador
 
     public Recurso obterRecursoAleatorio() 
     {
-        if (this.solicitacoesRecursos.isEmpty()) 
+        if (this.recursos.isEmpty()) 
             return null;
 
-        List<Recurso> recursos = new ArrayList<>(this.solicitacoesRecursos.keySet());
-        int indiceAleatorio = new Random().nextInt(recursos.size());
+        int indiceAleatorio = new Random().nextInt(this.recursos.size());
 
         return recursos.get(indiceAleatorio);
     }

@@ -7,12 +7,17 @@ import java.util.Random;
 public class ExclusaoMutuaCentralizada  extends Thread 
 {
     private final List<Processo> processos;
+    private final List<Recurso> recursos;
+
     public static Coordenador coordenador;
 
     @Override
     public void run() 
     {
         System.out.println("Algoritmo de Exclusão Mútua - Centralizado");
+
+        recursos.add(new Recurso(6));
+        recursos.add(new Recurso(9));
 
         this.encerrarCoordenador();
         this.criarProcesso();
@@ -21,6 +26,7 @@ public class ExclusaoMutuaCentralizada  extends Thread
     public ExclusaoMutuaCentralizada () 
     {
         this.processos = new ArrayList<>();
+        this.recursos  = new ArrayList<>(); 
     }
 
     private void encerrarCoordenador() 
@@ -34,7 +40,7 @@ public class ExclusaoMutuaCentralizada  extends Thread
                     Thread.sleep(Utilidades.getTempoMatarCoordenador());
 
                     System.out.println("[COORDENADOR] Morto!");
-                    coordenador = new Coordenador();
+                    coordenador = new Coordenador(this.recursos);
                     System.out.println("[COORDENADOR] Criado!");
 
                     for (Processo processo : this.processos)
