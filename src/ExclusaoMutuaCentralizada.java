@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class ExclusaoCentralizada  extends Thread 
+public class ExclusaoMutuaCentralizada  extends Thread 
 {
     private final List<Processo> processos;
     public static Coordenador coordenador;
@@ -18,10 +18,9 @@ public class ExclusaoCentralizada  extends Thread
         this.criarProcesso();
     }
 
-    public ExclusaoCentralizada () 
+    public ExclusaoMutuaCentralizada () 
     {
         this.processos = new ArrayList<>();
-        coordenador = new Coordenador();
     }
 
     private void criarProcesso() 
@@ -42,8 +41,6 @@ public class ExclusaoCentralizada  extends Thread
                         novoId = gerador.nextInt(Integer.MAX_VALUE);
                     } 
                     while (testaId(novoId));
-
-                    final int id = novoId;
 
                     processo.setId(novoId);
                     processo.requisitaRecurso();
