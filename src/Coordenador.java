@@ -60,8 +60,8 @@ public class Coordenador
             return null;
 
         List<Recurso> recursos = new ArrayList<>(this.solicitacoesRecursos.keySet());
-        int índiceAleatório = new Random().nextInt(recursos.size());
+        int indiceAleatorio = new Random().nextInt(recursos.size());
 
-        return recursos.get(índiceAleatório);
+        return recursos.get(indiceAleatorio);
     }
 }

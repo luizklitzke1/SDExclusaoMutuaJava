@@ -30,7 +30,8 @@ public class ExclusaoMutuaCentralizada  extends Thread
         {
             while (true) 
             {
-                try {
+                try 
+                {
                     Thread.sleep(Utilidades.getTempoNovoProcesso());
 
                     Processo processo = new Processo();
@@ -90,7 +91,7 @@ public class ExclusaoMutuaCentralizada  extends Thread
 
     private void imprimirProcessos() 
     {
-        String processos =  "[PROCESSOS] ";
+        String processos = "[PROCESSOS] ";
 
         for (Processo processo : this.processos)
         {

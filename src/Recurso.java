@@ -21,7 +21,7 @@ public class Recurso
     }
 
     public void setUsando(boolean sendoAcessado)
-     {
+    {
         this.usando = sendoAcessado;
     }
 
@@ -34,15 +34,15 @@ public class Recurso
     @Override
     public boolean equals(Object obj) 
     {
-        if( this == obj )
+        if (this == obj)
         {
             return true;
         }
-        else if(obj == null)
+        else if (obj == null)
         {
             return false;
         }
-        else if(obj instanceof Recurso)
+        else if (obj instanceof Recurso)
         {
             Recurso recurso = (Recurso) obj;
             return recurso.getId() == this.getId();
@@ -52,5 +52,4 @@ public class Recurso
             return false;
         }
     }
-
 }
