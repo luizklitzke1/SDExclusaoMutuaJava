@@ -48,7 +48,7 @@ public class Processo
             {
                 try 
                 {
-                    int tempoEntreExecucoes = Utilidades.getTempoProcessamento();
+                    int tempoEntreExecucoes = Utilidades.getTempoRequisicao();
                     Thread.sleep(tempoEntreExecucoes);
 
                     Recurso recurso = ExclusaoMutuaCentralizada.coordenador.obterRecursoAleatorio();

@@ -23,6 +23,32 @@ public class ExclusaoMutuaCentralizada  extends Thread
         this.processos = new ArrayList<>();
     }
 
+    private void encerrarCoordenador() 
+    {
+        new Thread(() -> 
+        {
+            while (true) 
+            {
+                try 
+                {
+                    Thread.sleep(Utilidades.getTempoMatarCoordenador());
+
+                    System.out.println("[COORDENADOR] Morto!");
+                    coordenador = new Coordenador();
+                    System.out.println("[COORDENADOR] Criado!");
+
+                    for (Processo processo : this.processos)
+                        processo.reiniciaProcesso();
+
+                } 
+                catch (InterruptedException e) 
+                {
+                    throw new RuntimeException(e);
+                }
+            }
+        }).start();
+    }
+
     private void criarProcesso() 
     {
         Random gerador = new Random();
@@ -49,32 +75,6 @@ public class ExclusaoMutuaCentralizada  extends Thread
 
                     System.out.println("[PROCESSO] Criado: " + processo.getId());
                     imprimirProcessos();
-                } 
-                catch (InterruptedException e) 
-                {
-                    throw new RuntimeException(e);
-                }
-            }
-        }).start();
-    }
-
-    private void encerrarCoordenador() 
-    {
-        new Thread(() -> 
-        {
-            while (true) 
-            {
-                try 
-                {
-                    Thread.sleep(Utilidades.getTempoMatarCoordenador());
-
-                    System.out.println("[COORDENADOR] Morto!");
-                    coordenador = new Coordenador();
-                    System.out.println("[COORDENADOR] Criado!");
-
-                    for (Processo processo : this.processos)
-                        processo.reiniciaProcesso();
-
                 } 
                 catch (InterruptedException e) 
                 {

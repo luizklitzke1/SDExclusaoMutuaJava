@@ -1,12 +1,10 @@
-//Alunos: Arthur B Pinotti, Kaue Reblin, Luiz Gustavo Klitzke
-
 import java.util.Random;
 
 public class Utilidades 
 {
 
     public static int geraValorEntre(int min, int max)
-    {
+     {
         return new Random().nextInt(max - min) + min;
     }
 
