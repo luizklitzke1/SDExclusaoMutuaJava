@@ -29,10 +29,11 @@ public class Processo
 
             System.out.println("[FIM] Processo: " + this.getId() + " | Recurso: " + recurso.getId() + "| Tempo: " + (duracaoExecucao / 1000) + "s");
 
-            ExclusaoCentralizada.coordenador.liberarRecurso(new Solicitacao(this, recurso));
+            ExclusaoMutuaCentralizada.coordenador.liberarRecurso(new Solicitacao(this, recurso));
         } 
         catch (InterruptedException e) 
         {
+            recurso.setUsando(false);
             System.out.println("[INTERRUPÇÃO] Processamento do Processo: " + this.getId() + " | Recurso: " + recurso.getId());
         }
     }
@@ -48,10 +49,10 @@ public class Processo
                     int tempoEntreExecucoes = Utilidades.getTempoProcessamento();
                     Thread.sleep(tempoEntreExecucoes);
 
-                    Recurso recurso = ExclusaoCentralizada.coordenador.obterRecursoAleatorio();
+                    Recurso recurso = ExclusaoMutuaCentralizada.coordenador.obterRecursoAleatorio();
                     System.out.println("[ENVIADO] Processo: " + this.getId() + "| Após: " + tempoEntreExecucoes / 1000 + "s" + " | Recurso: " + recurso.getId());
 
-                    ExclusaoCentralizada.coordenador.solicitarAcessoRecurso(new Solicitacao(this, recurso));
+                    ExclusaoMutuaCentralizada.coordenador.solicitarAcessoRecurso(new Solicitacao(this, recurso));
                 } 
                 catch (InterruptedException e) 
                 {
