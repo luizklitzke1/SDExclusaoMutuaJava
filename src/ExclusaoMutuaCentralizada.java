@@ -27,6 +27,8 @@ public class ExclusaoMutuaCentralizada  extends Thread
     {
         this.processos = new ArrayList<>();
         this.recursos  = new ArrayList<>(); 
+
+        coordenador = new Coordenador(recursos);
     }
 
     private void encerrarCoordenador() 

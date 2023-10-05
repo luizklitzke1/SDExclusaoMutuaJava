@@ -13,6 +13,12 @@ public class Coordenador
     public Coordenador(List<Recurso> recursos) 
     {
         this.recursos = recursos;
+
+        //Prepara as filas
+        for (Recurso recurso : recursos)
+        {
+            solicitacoesRecursos.put(recurso, new ConcurrentLinkedQueue<>());
+        }
     }
 
     public void solicitarAcessoRecurso(Solicitacao solicitacao) 
